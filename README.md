@@ -42,6 +42,21 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
+TakeMeter sorts posts from **r/nhl** (public subreddit, NHL hockey discussion)
+into four labels: `highlight`, `stat_fact`, `news_rumor`, and `question`. The
+text classified is the post title plus body text, if any. Opinion/hot-take
+posts are excluded from collection rather than forced into a label.
+
+**Milestone 1 — candidate distinctions noticed while reading r/nhl:**
+
+1. Some posts point at a moment of play (a goal, save, hit, fight) and are
+   mostly a short title for a video clip.
+2. Some posts cite a specific number (points, save %, records, "first since
+   19XX"). Most don't.
+3. Some posts name a source or insider ("per Friedman", "Elliotte reports")
+   or describe a transaction (trade, signing, injury). Others report nothing new.
+4. Some posts end in a question and ask the community for an answer.
+
 
 
 ---
