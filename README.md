@@ -42,20 +42,22 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
-TakeMeter sorts posts from **r/nhl** (public subreddit, NHL hockey discussion)
-into four labels: `highlight`, `stat_fact`, `news_rumor`, and `question`. The
-text classified is the post title plus body text, if any. Opinion/hot-take
-posts are excluded from collection rather than forced into a label.
+TakeMeter sorts posts from **HFBoards** (forums.hfboards.com, a public hockey
+discussion forum readable without a login) into four labels: `analysis`,
+`hot_take`, `reaction`, and `question`. Each individual forum post gets exactly
+one label, based on its dominant purpose: arguing from evidence, asserting
+without support, venting about a game, or asking the community.
 
-**Milestone 1 — candidate distinctions noticed while reading r/nhl:**
+**Milestone 1 — candidate distinctions noticed while reading HFBoards:**
 
-1. Some posts point at a moment of play (a goal, save, hit, fight) and are
-   mostly a short title for a video clip.
-2. Some posts cite a specific number (points, save %, records, "first since
-   19XX"). Most don't.
-3. Some posts name a source or insider ("per Friedman", "Elliotte reports")
-   or describe a transaction (trade, signing, injury). Others report nothing new.
-4. Some posts end in a question and ask the community for an answer.
+1. Some posts describe a specific play or moment from a game (a goal, save,
+   hit, overtime winner). Others talk about players or teams in general.
+2. Some posts cite a specific number (points, records, milestones, "first
+   since 19XX"). Most don't.
+3. Some posts report a transaction (trade, signing, injury) or relay a
+   reporter's information. Others report nothing new.
+4. Some posts ask the community for an answer, like "who should be in the
+   Hall of Fame?" or "will anyone pass X?"
 
 
 
@@ -63,39 +65,141 @@ posts are excluded from collection rather than forced into a label.
 
 ## Label Taxonomy
 
-<!-- Each label: a one-sentence definition and two real examples from your
-     reading. Then your decision rule for the hardest boundary.
+Each example includes a direct excerpt from the author's actual words, along with the thread title, post number, and source link. The label applies to the individual post's content, not the entire discussion thread.
 
-     The decision rule is worth a point on its own and it's the thing most
-     people leave out. Every taxonomy has a hardest boundary. Name yours. -->
+### `analysis`
 
-### `label_one`
-
-**Definition:**
+**Definition:** A post that evaluates a player, team, or hockey-related situation using supporting statistics, comparisons, evidence, or detailed reasoning.
 
 **Example 1:**
->
+
+Thread: 2025/26 Reflections and Ramblings
+
+Author: Brian39  
+Post: #1
+
+**Actual post text (excerpt):**
+
+> He was one of the worst goalies in the league this year. Dead last in goals saved above expected
+
+Link: https://forums.hfboards.com/threads/2025-26-reflections-and-ramblings.3028450/
 
 **Example 2:**
->
 
-### `label_two`
+Thread: Rumors & Proposals Thread | Deadline Day Edition
 
-**Definition:**
+Author: McDoused  
+Post: #2,730  
+Date: March 29, 2026
+
+**Actual post text (excerpt):**
+
+> A 47.27 xGF% for a shutdown pair is excellent. Asking for anymore would be unrealistic.
+
+Link: https://forums.hfboards.com/threads/rumors-proposals-thread-deadline-day-edition.3024438/page-110
+
+### `hot_take`
+
+**Definition:** A post making a confident hockey claim or prediction offered with little or no supporting reasoning.
 
 **Example 1:**
->
+
+Thread: Your 2025-2026 NHL hot takes
+
+Author: Kent Hughes  
+Post: #6
+
+**Actual post text:**
+
+> Tampa Bay won't make the playoffs.  
+> Colorado won't make the playoffs.
+
+Link: https://forums.hfboards.com/threads/your-2025-2026-nhl-hot-takes.3011442/
 
 **Example 2:**
->
 
-### The hardest boundary
+Thread: 2025-2026 NHL Predictions
 
-**Which two labels:**
+Author: Aashir  
+Post: #8
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**Actual post text (excerpt):**
+
+> A: Auston Matthews. I think he returns in a big way and scores 55-65G and 105+ points
+
+Link: https://forums.hfboards.com/threads/2025-2026-nhl-predictions.3011343/
+
+### `reaction`
+
+**Definition:** A post primarily expressing an emotional response, such as excitement, frustration, anger, disappointment, or surprise, to a game, performance, or recent hockey event.
+
+**Example 1:**
+
+Thread: Fire the team
+
+Author: Cloned  
+Post: #1
+
+**Actual post text (excerpt):**
+
+> This is a circus shitshow.  
+> Bouchard playing like Tom Gilbert, Ingram bringing back memories of Ty Conklin
+
+Link: https://forums.hfboards.com/threads/fire-the-team.3028945/
+
+**Example 2:**
+
+Thread: Another Loss
+
+Author: ACC1224  
+Post: #1
+
+**Actual post text:**
+
+> BOOOOOOOOOO!!!!!!!
+
+Link: https://forums.hfboards.com/threads/another-loss.3023969/
+
+### `question`
+
+**Definition:** A post whose primary purpose is asking the community for information, opinions, predictions, or answers rather than presenting a personal argument or reaction.
+
+**Example 1:**
+
+Thread: Will any dman surpass Erik Karlssons 101p in the coming seasons?
+
+Author: Janvonpobben  
+Post: #1
+
+**Actual post text (excerpt):**
+
+> Will any dman surpass Erik Karlssons 101points in the coming seasons?  
+> All-time list btw
+
+Link: https://forums.hfboards.com/threads/will-any-dman-surpass-erik-karlssons-101p-in-the-coming-seasons.3024056/
+
+**Example 2:**
+
+Thread: Which of the follow goalies should be in the hall of fame?
+
+Author: Mitch nylander  
+Post: #1
+
+**Actual post text (excerpt):**
+
+> When all is said and done which of this list should be in the hockey hall of fame??
+
+Link: https://forums.hfboards.com/threads/which-of-the-follow-goalies-should-be-in-the-hall-of-fame.3029497/
+
+### Hardest Boundary: `analysis` vs. `hot_take`
+
+**Decision Rule:** When a post contains both an opinion and supporting information, the label depends on whether evidence and reasoning are central to its message. If the author develops an argument using statistics, comparisons, performance evaluations, or other evidence, classify the post as `analysis`, even when its conclusion is controversial. If the post mainly presents a bold prediction or strong opinion with little supporting reasoning, classify it as `hot_take`.
+
+For example, predicting that Colorado will miss the playoffs without providing supporting evidence is a `hot_take`. Arguing that Colorado will miss the playoffs by examining roster depth, defensive statistics, injuries, and player performance is `analysis`.
+
+For other overlapping categories, classify according to the primary communicative purpose of the post. An emotional response to a recent game is `reaction`, even if it includes criticism. A post primarily requesting an answer is `question`, even if it provides statistics or background information. A question mark alone is not sufficient to determine the label.
+
+**General Classification Rule:** Assign exactly one label to each individual post based on its dominant purpose, rather than on the title of the thread in which it appears.
 
 
 
@@ -106,7 +210,7 @@ posts are excluded from collection rather than forced into a label.
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** All examples were collected from [HFBoards](https://forums.hfboards.com/), a hockey discussion forum. The unit of text used for classification is **one individual forum post**. This can be either the opening post of a thread (#1) or a single reply within an existing thread.
 
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
 Say so plainly — the disclosure is required, not penalised. -->
