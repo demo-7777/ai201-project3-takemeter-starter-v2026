@@ -51,63 +51,53 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Prediction Balance
 
-<!-- Your criterion. It must name a number. -->
-
-
+Each of the four labels (`analysis`, `hot_take`, `reaction`, `question`) must account for at least 10% of the model's predictions on the held-out test set.
 
 **Why this target:**
 
-
+I chose this target to ensure the model uses all four labels instead of repeatedly favoring certain labels or failing to assign others.
 
 ---
 
-## 2.
+## 2. Analysis vs. Hot Take Accuracy
 
-<!-- Your criterion. -->
-
-
+Of held-out test posts whose true label is `analysis` or `hot_take`, no more than 25% are predicted as the other of the two (an `analysis` post labeled `hot_take`, or a `hot_take` post labeled `analysis`). Predictions of `reaction` or `question` are not counted as errors for this criterion.
 
 **Why this target:**
 
-
+I chose this target because both labels may contain similar language and central claims. I hypothesize that the model will struggle to distinguish arguments supported by specific evidence from opinions that lack sufficient support.
 
 ---
 
-## 3.
+## 3. Overall Accuracy
 
-<!-- Your criterion. -->
-
-
+The model must correctly classify at least 75% of all posts in the held-out test set across the four labels (`analysis`, `hot_take`, `reaction`, `question`).
 
 **Why this target:**
 
-
+I chose this target to measure the model's overall ability to correctly classify HFBoards posts. Since there are four possible labels, I believe 75% accuracy would demonstrate that the model can reliably identify different types of posts rather than frequently misclassifying them.
 
 ---
 
-## 4.
+## 4. Prediction Confidence
 
-<!-- Your criterion. -->
-
-
+On the held-out test set, the model's accuracy on its most confident third of predictions must be at least 15 percentage points higher than its accuracy on its least confident third, as reported by the notebook's confidence report in `results.json`.
 
 **Why this target:**
 
-
+I chose a relatively low difference because I am hypothesizing it will be easy to distinguish most of the labels.
 
 ---
 
-## 5.
+## 5. Question Label Accuracy
 
-<!-- Your criterion. -->
-
-
+The model must correctly classify at least 90% of posts manually labeled as `question` in the held-out test set.
 
 **Why this target:**
 
-
+I chose a higher accuracy target for the `question` label because I predict these posts will be easier to identify. Questions often contain recognizable features, such as the `?` character and phrases like "how much" or "who will." I want to test whether these features make questions easier for the model to classify correctly.
 
 ---
 
