@@ -69,7 +69,7 @@ Each example includes a direct excerpt from the author's actual words, along wit
 
 ### `analysis`
 
-**Definition:** A post that evaluates a player, team, or hockey-related situation using supporting statistics, comparisons, evidence, or detailed reasoning.
+**Definition:** A post that evaluates a player, team, or hockey related situation using supporting statistics, comparisons, evidence, or detailed reasoning.
 
 **Example 1:**
 
@@ -266,6 +266,16 @@ Say so plainly — the disclosure is required, not penalised. -->
 split. If a label had fewer than about 8 in test, say so — it explains a lot
 of next unit's variance. -->
 
+train 139 · val 31 · test 31
+
+| Label | Train | Val | Test |
+|---|---|---|---|
+| `analysis` | 37 | 8 | 8 |
+| `hot_take` | 36 | 8 | 8 |
+| `reaction` | 42 | 10 | 10 |
+| `question` | 24 | 5 | 5 |
+
+- `question` has only **5 examples in the test split** (below the ~8 threshold). Its F1, and criterion #5, will move a lot between seeds.
 
 
 ---
