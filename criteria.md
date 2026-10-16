@@ -57,7 +57,7 @@ Each of the four labels (`analysis`, `hot_take`, `reaction`, `question`) must ac
 
 **Why this target:**
 
-I chose this target to ensure the model uses all four labels instead of repeatedly favoring certain labels or failing to assign others.
+I chose this target to ensure the model uses all four labels instead of repeatedly favoring certain labels or failing to assign others. Each label in my current dataset accounts for over 10% of the posts (`reaction` 30.8%, `analysis` 26.4%, `hot_take` 25.9%, `question` 16.9%), so a model that predicts any label less than 10% of the time is under-using it relative to the data it learned from.
 
 ---
 
@@ -87,7 +87,7 @@ On the held-out test set, the model's accuracy on its most confident third of pr
 
 **Why this target:**
 
-I chose a relatively low difference because I am hypothesizing it will be easy to distinguish most of the labels.
+I chose a relatively low difference because I am hypothesizing it will be easy to distinguish most of the labels. Many HFBoards posts in my dataset are short (e.g. "WTF", "Just terrible"), and short posts should be easy to label because there is typically less ambiguity in a short post.
 
 ---
 

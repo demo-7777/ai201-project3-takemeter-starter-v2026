@@ -214,15 +214,19 @@ For other overlapping categories, classify according to the primary communicativ
 
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
 Say so plainly — the disclosure is required, not penalised. -->
+I labeled the first 20 posts cold, by myself, using only my definitions (marked `cold` in the note column). The remaining 181 posts were parsed from HFBoards threads and pre-labeled by AI (marked `AI-assisted`). I then reviewed those labels against my definitions and decision rule and changed some of them, mainly `question` labels. Posts that were borderline or depended on missing context are flagged in the note column.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `reaction` | 62 | 30.8% |
+| `analysis` | 53 | 26.4% |
+| `hot_take` | 52 | 25.9% |
+| `question` | 34 | 16.9% |
+| **Total** | 201 | 100% |
+
+No label is above the 70% cap. `question` is the thinnest label.
 
 **Three hard cases**
 
@@ -230,25 +234,25 @@ Say so plainly — the disclosure is required, not penalised. -->
      been, and what you chose. These are worth more than the easy 190. -->
 
 **1.**
-> *The post:*
+> *The post:* "He's had knee problems dating back to before his draft where he cracked his kneecap horsing around with a teammate in the locker room. I assume kneecaps heal like bones and there is minimal to no post recovery complications but for someone who's effectiveness relies on his skating and edgework this blows. Ritchie 2C?"
 >
-> *Could have been:*
+> *Could have been:* `analysis` or `question`
 >
-> *I chose, because:*
+> *I chose, because:* `question`. Most of the post is injury history and reasoning, which reads like `analysis`, but it ends by asking the community a lineup question ("Ritchie 2C?"). Under my rule, a post that asks the community for an answer is `question` even if it includes background. At first I read only the first part and thought it was `analysis`, which shows how much the last line decides this one.
 
 **2.**
-> *The post:*
+> *The post:* "Did anyone watch the film? I'm watching it now and, I'm kinda disappointed in it. It's very quick, there's next to no mention of the regular season, and very little about the first 3 rounds. It mentions the ECF struggles, and Rods time as captain and 2006, but it's not what the 2006 film was or others that were released in that time frame. It basically gets right into the Final, and even then there's some recycled material from "Quest for the Cup". I feel there's a lot that is missed. Particularly the years after the Cup, the transfer of ownership from Karmanos to Dundon and the hiring of Rod shortly after, and the build-up to this season."
 >
-> *Could have been:*
+> *Could have been:* `question` or `reaction`
 >
-> *I chose, because:*
+> *I chose, because:* `analysis`. It opens with a question ("Did anyone watch the film?") and expresses disappointment, so it could be read as `question` or `reaction`. But the opening question only introduces the writer's own review. It doesn't ask the community for an answer the way "Ritchie 2C?" does in hard case #1. Most of the post supports the disappointment with specific evidence (what the film covers, what it skips, the comparison to the 2006 film), so under my dominant-purpose rule it's `analysis`.
 
 **3.**
-> *The post:*
+> *The post:* "Panarin? Leadership? WTF are these clowns even talking about?"
 >
-> *Could have been:*
+> *Could have been:* `question` or `reaction`
 >
-> *I chose, because:*
+> *I chose, because:* `reaction`. Every sentence ends in a question mark, but the writer isn't asking the community for an answer. The questions express disbelief and frustration at what commentators said. Under my rule, a question mark alone doesn't make a post `question`. The dominant purpose here is venting, so it's `reaction`.
 
 ---
 
@@ -256,11 +260,14 @@ Say so plainly — the disclosure is required, not penalised. -->
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
 **Settings:** <!-- epochs, learning rate, batch size, seed -->
+3 epochs · learning rate 2e-5 · batch size 16 · max length 128 tokens · seed 42
 
-**Anything I changed from the defaults, and why:**
+**Device:** cpu (torch 2.14.1+cu130), as recorded in `results.json`. Results can differ slightly on other hardware with the same seed.
+
+**Anything I changed from the defaults, and why:** Nothing. All settings are the notebook defaults. The only edit was setting `LABELS` to my four labels.
 
 **Split sizes:** <!-- train / val / test, and per-label counts in the test
 split. If a label had fewer than about 8 in test, say so — it explains a lot
@@ -291,17 +298,17 @@ train 139 · val 31 · test 31
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I used AI to parse posts from HFBoards threads and write them into `labels.csv` with a suggested label and a note.
+- *What came back:* Rows in `text,label,note` format. Quoted replies were stripped out, and borderline or context-dependent posts were flagged in the note column (e.g. "borderline analysis/hot_take", "context-dependent").
+- *What I changed:* I reviewed the suggested labels against my definitions and decision rule, and changed some of the `question` labels the AI assigned.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I used AI to review errors I hit while running cells in `takemeter.ipynb`.
+- *What came back:* For example, section 5 failed with `NameError: name 'DEVICE' is not defined`. The explanation was that section 1's first cell hadn't run in the current kernel session.
+- *What I changed:* I reran sections 1–5 in order, and section 5 then wrote `results.json` and `test_split.csv`.
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** 20 rows were labeled cold by me with no tools (marked `cold` in the note column). The other 181 rows were pre-labeled by AI (marked `AI-assisted` in the note column) and then reviewed by me.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
