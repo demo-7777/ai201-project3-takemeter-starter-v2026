@@ -403,11 +403,11 @@ Seed 42, from notebook section 7:
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Every label ≥ 10% of predictions | ≥ 10% | MISSED | `question` was predicted 0 times out of 31 on all three seeds (0.0%) |
+| 2 | `analysis` ↔ `hot_take` swaps | ≤ 25% | MISSED | 31.3%, 50.0%, 25.0%. Seeds 42 and 7 exceed 25% |
+| 3 | Overall accuracy | ≥ 0.75 | MISSED | 0.516, 0.355, 0.581. All three below 0.75 |
+| 4 | Confidence gap | ≥ 15 pts | MISSED | 40, 10, 20 pts. Seed 7 is below 15 |
+| 5 | `question` recall | ≥ 0.90 | MISSED | 0/5 on all three seeds |
 
 **Diagnoses**
 
@@ -419,6 +419,21 @@ Seed 42, from notebook section 7:
      ⚠️ Use your agreement report as evidence. It is the only instrument you
      have that can tell a LABELLING problem from a MODEL problem, and this
      section is graded on whether you used it that way. -->
+
+**1. Prediction balance — cause: too few examples for `question`.**
+Not every label reached 10% of predictions because the `question` label was consistently missed, likely because the model had the fewest `question` posts to train on. Evidence: `question` is my thinnest label (34 posts, 16.9%), leaving only 24 in the training split, against 36–42 for the other labels. The model predicted `question` 0 times out of 31 on every seed, so it never learned to output it.
+
+**2. `analysis` ↔ `hot_take` swaps — cause: a genuinely hard label pair.**
+The swaps exceeded the limit likely because this is a genuinely hard pair. Evidence: the swaps are lopsided in one direction on every seed. Real `hot_take` posts were called `analysis` 5 / 6 / 3 times, while real `analysis` posts were called `hot_take` only 0 / 2 / 1 times. Both labels are opinions about players and teams, and the difference (whether evidence carries the argument) is a judgment, not a surface feature like a `?`. While labeling, I flagged many posts as "borderline analysis/hot_take" in my notes. *Agreement report evidence: pending staff labels. If my disagreements with staff cluster on this pair, the cause is my labeling rather than the model.*
+
+**3. Overall accuracy — cause: a task the model can't reach from this much data.**
+Overall accuracy was not met likely because the model can't reach this task from this much data. Evidence: it trained on 139 posts, and the test split has only about 8 posts per label. Accuracy swung 22.6 points across seeds (0.355 to 0.581), more than the ~10 points the brief flags as unstable. Final training loss was about 1.32, barely below 1.386, the loss of a random guess across 4 labels, so the model learned very little.
+
+**4. Confidence gap — cause: too few examples.**
+The confidence gap missed on seed 7 because there are too few examples. Evidence: each third of the test set holds only 10 posts, so one post changes a third's accuracy by 10 points. Seed 7 got 10 points against a 15-point target, a miss by a single post. The model's average confidence is also about 0.29 whether it's right or wrong, close to the 0.25 a random 4-way guesser gets, so there is little real confidence signal to separate.
+
+**5. `question` recall — cause: too few examples for `question`.**
+Same cause as criterion 1, with separate evidence. `question` recall was 0/5 on every seed. The 5 real `question` posts were predicted as `reaction` (4 / 1 / 2) or `analysis` (1 / 4 / 3). With only 24 training examples, and many `question` posts short and dependent on missing context ("Why?", "@Flan the incredible ?"), the model never learned what separates a `question` from a short `reaction`.
 
 
 
