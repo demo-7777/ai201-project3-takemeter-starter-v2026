@@ -355,24 +355,39 @@ The trained model had mixed results across catching multiple labels, in some cas
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Every label ≥ 10% of predictions (smallest share) | ≥ 10% | 0.0% (`hot_take`, `question`) | 0.0% (`question`) | 0.0% (`question`) | MISSED |
+| 2. `analysis` ↔ `hot_take` swaps | ≤ 25% | 31.3% (5/16) | 50.0% (8/16) | 25.0% (4/16) | MISSED |
+| 3. Overall accuracy | ≥ 0.75 | 0.516 | 0.355 | 0.581 | MISSED |
+| 4. Confidence gap (most-sure third − least-sure third) | ≥ 15 pts | 40 pts (0.80 − 0.40) | 10 pts (0.40 − 0.30) | 20 pts (0.70 − 0.50) | MISSED |
+| 5. `question` recall | ≥ 0.90 | 0.000 (0/5) | 0.000 (0/5) | 0.000 (0/5) | MISSED |
+
+**Device:** cpu (torch 2.14.1+cu130), for all three seeds, as recorded in `results_three_seeds_before.json`.
+
+**Spread:** accuracy ranges from 0.355 to 0.581 across seeds, a 22.6-point swing. That's more than the ~10 points the brief flags as a sign the dataset is too small for a stable measure.
+
+Predictions per label (out of 31), used for criterion 1:
+
+| Seed | `analysis` | `hot_take` | `reaction` | `question` |
+|---|---|---|---|---|
+| 42 | 12 | 0 | 19 | 0 |
+| 7 | 20 | 7 | 4 | 0 |
+| 2024 | 13 | 2 | 16 | 0 |
 
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
-|---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+Seed 42, from notebook section 7:
 
-**My biggest off-diagonal number, and what it means:**
+| true \ predicted | analysis | hot_take | reaction | question |
+|---|---|---|---|---|
+| **analysis** | 6 | 0 | 2 | 0 |
+| **hot_take** | 5 | 0 | 3 | 0 |
+| **reaction** | 0 | 0 | 10 | 0 |
+| **question** | 1 | 0 | 4 | 0 |
+
+**My biggest off-diagonal number, and what it means:** The biggest off-diagonal number was hot_take\analysis at 5, it means that 5 hot_take posts were incorrectly assigned the analysis label. Additionally, 0 analysis posts went the other way, so the model leans toward analysis on that boundary
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
