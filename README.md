@@ -495,21 +495,41 @@ Same cause as criterion 1, with separate evidence. `question` recall was 0/5 on 
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** One training setting: `EPOCHS` from 3 to 10. Everything else (data, labels, learning rate 2e-5, batch size 16, max length 128, seeds 42 / 7 / 2024, cpu) stayed the same. Results are in `results_three_seeds_after.json`.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** Diagnoses 3 and 4. In the before run, final training loss was about 1.32, barely below the 1.386 of a random 4-way guess, and average confidence was about 0.29 whether right or wrong (random is 0.25). The model was undertrained, so more passes over the same data was the one change the evidence pointed at.
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Every label ≥ 10% of predictions (smallest share) | ≥ 10% | 6.5% (`question`, 2/31) | 9.7% (`question`, 3/31) | 0.0% (`question`, 0/31) | MISSED |
+| 2. `analysis` ↔ `hot_take` swaps | ≤ 25% | 25.0% (4/16) | 31.3% (5/16) | 25.0% (4/16) | MISSED |
+| 3. Overall accuracy | ≥ 0.75 | 0.645 | 0.613 | 0.581 | MISSED |
+| 4. Confidence gap (most-sure third − least-sure third) | ≥ 15 pts | 60 pts (0.90 − 0.30) | 20 pts (0.70 − 0.50) | 30 pts (0.70 − 0.40) | MET |
+| 5. `question` recall | ≥ 0.90 | 0.400 (2/5) | 0.600 (3/5) | 0.000 (0/5) | MISSED |
 
-**Did it help, and how do I know:**
+**Before → after, side by side:**
+
+| Measure | Before (seeds 42 / 7 / 2024) | After (seeds 42 / 7 / 2024) |
+|---|---|---|
+| Accuracy | 0.516 / 0.355 / 0.581 | 0.645 / 0.613 / 0.581 |
+| Macro F1 | 0.322 / 0.281 / 0.409 | 0.615 / 0.622 / 0.480 |
+| F1 — `analysis` | 0.600 / 0.429 / 0.667 | 0.706 / 0.600 / 0.667 |
+| F1 — `hot_take` | 0.000 / 0.267 / 0.200 | 0.400 / 0.400 / 0.545 |
+| F1 — `reaction` | 0.690 / 0.429 / 0.769 | 0.783 / 0.737 / 0.706 |
+| F1 — `question` | 0.000 / 0.000 / 0.000 | 0.571 / 0.750 / 0.000 |
+
+Confusion matrix after, seed 42:
+
+| true \ predicted | analysis | hot_take | reaction | question |
+|---|---|---|---|---|
+| **analysis** | 6 | 2 | 0 | 0 |
+| **hot_take** | 2 | 3 | 3 | 0 |
+| **reaction** | 0 | 1 | 9 | 0 |
+| **question** | 1 | 1 | 1 | 2 |
+
+**Did it help, and how do I know:** It did help. Macro F1 roughly doubled on two seeds (0.32 → 0.62 and 0.28 → 0.62) and rose from 0.41 to 0.48 on the third. `hot_take` and `question` are now predicted at all. Accuracy rose on two seeds and stayed at 0.581 on seed 2024. Against my criteria, it moved #4 (confidence gap) from MISSED to MET, but #1, #2, #3 and #5 are still MISSED on at least one seed. On seed 2024, `question` is still never predicted.
 
 <!-- If it didn't, say so. Relabelling that didn't help is a genuinely
      interesting result and earns full credit. -->
