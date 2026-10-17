@@ -1,0 +1,195 @@
+{
+  "model": "facebook/bart-large-mnli",
+  "n": 31,
+  "seed": 42,
+  "held_out": true,
+  "used_definitions": true,
+  "scores": {
+    "n": 31,
+    "accuracy": 0.2903225806451613,
+    "f1_macro": 0.20098039215686275,
+    "per_label": {
+      "analysis": {
+        "precision": 0.3076923076923077,
+        "recall": 1.0,
+        "f1": 0.47058823529411764,
+        "support": 8
+      },
+      "hot_take": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 8
+      },
+      "question": {
+        "precision": 1.0,
+        "recall": 0.2,
+        "f1": 0.33333333333333337,
+        "support": 5
+      },
+      "reaction": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 10
+      }
+    }
+  },
+  "predictions": [
+    {
+      "text": "You don't pull a Rick Dudley in this situation. You select first overall and let that carry you through some lean years with the hope this can be turned around with a new core, centered around that first overall. You're not making these oddball moves to draft in the Travis Dermott slot.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "To NJ. :popcorn:",
+      "gold": "reaction",
+      "predicted": "hot_take"
+    },
+    {
+      "text": "And he also isn\u2019t afraid to throw it at the net",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "1941 semis, Boston over the Maple Leafs. Still the tightest game 7 series I've ever seen with some of the tightest dudes as well.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Yup. Woo is one of those guys that fits that description. 5'10 180 his 2nd time in draft who teams might not be able to ignore after the season he had.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Honestly it doesn't matter where he goes, because he will be a playoff disappointment, he just does not have that dawg in him.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Tarasenko next?",
+      "gold": "question",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Read the blues fans comments. he is cooked",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Having watched the replay several times, focusing on each player most involved in the play, I'm so glad the Canes moved on from Hanifin. He managed to cough the puck up at least 5 times in about 15 seconds to players he's got more than 4 inches and 40 pounds on.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "And so it begins already. Cant imagine he will be ready for opening night. He was just at the US Open 3 days ago and looked fine. How did he get injured?",
+      "gold": "question",
+      "predicted": "analysis"
+    },
+    {
+      "text": "that damn pig made it LOL.\n\n(Adore the ring btw).",
+      "gold": "reaction",
+      "predicted": "hot_take"
+    },
+    {
+      "text": "Yeah +/- isn\u2019t the end-all, be-all judge of a player, but his is AGGRESSIVELY bad these past two seasons. Wildly so.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "The cope is still ongoing, still hilarious \ud83d\ude02",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "They are not paying 8 1sts for Thomas lol.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Douche really f***ed up this one",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "AM to San Jose for 2nd pick.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Which ones were ? I formulated the title as a question because I'm looking for cases that may have been equally or even more tight.\n\nOk.",
+      "gold": "question",
+      "predicted": "question"
+    },
+    {
+      "text": "I think Calgary has looked the worst so far, and they haven't even had a difficult schedule with Seattle twice and Vancouver. My pick is them.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "It wasn\u2019t.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "So I guess no harm in sharing now. I won't share how I came across this information, but I was told weeks ago by someone close to the organization that right after the season was over, like, immediately after, Helleys house was boxed up. Everything. His mind was made up months ago.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Everybody waits the full week. I\u2019d bet cash they knew what they were gonna do the second it was signed.\n\nThe Canes had a meddlesome owner that makes dealing with them awful and everyone hates dealing with them. They won the cup with a bunch of contracts they grinded the hell out of. Who the hell cares what the agents think of gm\u2019s? I\u2019d take it as a compliment that an agent doesn\u2019t like dealing with your team.\n\nAlso\u2026.twitter is bile.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Matthews +? for Misa + 2nd Overall\n\nMcKenna, Misa, and Reid as your new core with Knies, Nylander, Cowan, Danford etc..",
+      "gold": "question",
+      "predicted": "hot_take"
+    },
+    {
+      "text": "Fun animation.",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "If players can just \"ask out\" and have their trade request granted immediately, they should have negotiated that option into the CBA.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "It was spreading in a somewhat uniform fashion, though. Over the last year or so every player type has been getting more money and a normal amount of cap had been spent all things considered. That would\u2019ve included these young 1C types who were seemingly in line to hit in that $12-15 million range which wasn\u2019t overly different from the past either.\n\nThis isn\u2019t the first time a young 1C has been paid like a normal 1C but this is pretty much unprecedented because of the level of player he is. McDavid was the highest AAV player in the game on his second contract but he\u2019s McDavid and he probably wouldn\u2019t have been the highest if Crosby and Ovechkin didn\u2019t sign such long deals. Those two were in the same boat on their second deals but these three are actually fitting for the generational billing, they\u2019re a bit different. I love Leo to death but he\u2019s not that and even as a percentage of cap he\u2019s went past all of them. I don\u2019t think there was anything inevitable about it, this is a completely brand new territory that could\u2019ve pretty easily been avoided.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Hard to imagine much closer...",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Thought exercise. Clearly stated.\nThose firsts aren\u2019t worth much.",
+      "gold": "hot_take",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Yep that bar whose name I forget right outside the arena was overwhelmingly filled with Canes fans",
+      "gold": "reaction",
+      "predicted": "analysis"
+    },
+    {
+      "text": "The Montreal Canadiens are not a real Hockey franchise. You heard it here first, folks.",
+      "gold": "reaction",
+      "predicted": "hot_take"
+    },
+    {
+      "text": "I wonder if he can be a stronger McDonagh with better offense.",
+      "gold": "question",
+      "predicted": "analysis"
+    },
+    {
+      "text": "Pretty hard to tell who will be there 50-70 picks in.\n\nBut...\n\nThe names at this time I'd be interested to see if they're available are Verrtti Svensk, Tommy Bleyl, and Adam Andersson.",
+      "gold": "analysis",
+      "predicted": "analysis"
+    }
+  ]
+}

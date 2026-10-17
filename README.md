@@ -324,18 +324,25 @@ train 139 · val 31 · test 31
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.290 | 0.516 | +0.226 |
+| Macro F1 | 0.201 | 0.322 | +0.121 |
+| F1 — `analysis` | 0.471 | 0.600 | +0.129 |
+| F1 — `hot_take` | 0.000 | 0.000 | +0.000 |
+| F1 — `question` | 0.333 | 0.000 | -0.333 |
+| F1 — `reaction` | 0.000 | 0.690 | +0.690 |
+
+Baseline: `facebook/bart-large-mnli` zero-shot, using my definitions from `label_definitions.txt`, scored on the same 31 posts in `test_split.csv` (seed 42), on cpu.
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+Looking at the baseline's performance, I predict the trained model will be able to catch `hot_take` and `reaction` posts (where the baseline scored 0.000 F1), and will be most accurate at finding `question` posts.
+     
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
+The trained model had mixed results across catching multiple labels, in some cases improving accuracy, decreasing accuracy, or continuing to not catch a label. It improved on `reaction` (0.000 → 0.690) and `analysis` (0.471 → 0.600), got worse on `question` (0.333 → 0.000), and still caught no `hot_take` posts (0.000 in both). Overall accuracy rose from 0.290 to 0.516, but almost all of that gain came from `reaction`.
 
 
 
