@@ -424,7 +424,7 @@ Seed 42, from notebook section 7:
 Not every label reached 10% of predictions because the `question` label was consistently missed, likely because the model had the fewest `question` posts to train on. Evidence: `question` is my thinnest label (34 posts, 16.9%), leaving only 24 in the training split, against 36–42 for the other labels. The model predicted `question` 0 times out of 31 on every seed, so it never learned to output it.
 
 **2. `analysis` ↔ `hot_take` swaps — cause: a genuinely hard label pair.**
-The swaps exceeded the limit likely because this is a genuinely hard pair. Evidence: the swaps are lopsided in one direction on every seed. Real `hot_take` posts were called `analysis` 5 / 6 / 3 times, while real `analysis` posts were called `hot_take` only 0 / 2 / 1 times. Both labels are opinions about players and teams, and the difference (whether evidence carries the argument) is a judgment, not a surface feature like a `?`. While labeling, I flagged many posts as "borderline analysis/hot_take" in my notes. *Agreement report evidence: pending staff labels. If my disagreements with staff cluster on this pair, the cause is my labeling rather than the model.*
+The swaps exceeded the limit likely because this is a genuinely hard pair. Evidence: the swaps are lopsided in one direction on every seed. Real `hot_take` posts were called `analysis` 5 / 6 / 3 times, while real `analysis` posts were called `hot_take` only 0 / 2 / 1 times. Both labels are opinions about players and teams, and the difference (whether evidence carries the argument) is a judgment, not a surface feature like a `?`. While labeling, I flagged many posts as "borderline analysis/hot_take" in my notes. Agreement report evidence: I matched staff on all 30 posts, including all 4 HARD posts on the `analysis` ↔ `hot_take` boundary (sp_005, sp_010, sp_014, sp_020). That points away from my labeling and toward the pair being genuinely hard for the model. One caveat: the staff set uses a different taxonomy and a different community, so this is indirect evidence about my own 200 labels, not proof.
 
 **3. Overall accuracy — cause: a task the model can't reach from this much data.**
 Overall accuracy was not met likely because the model can't reach this task from this much data. Evidence: it trained on 139 posts, and the test split has only about 8 posts per label. Accuracy swung 22.6 points across seeds (0.355 to 0.581), more than the ~10 points the brief flags as unstable. Final training loss was about 1.32, barely below 1.386, the loss of a random guess across 4 labels, so the model learned very little.
@@ -447,7 +447,7 @@ Same cause as criterion 1, with separate evidence. `question` recall was 0/5 on 
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 30 / 30 = 100% (from `python agreement.py`, saved in `agreement_results.json`)
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -469,25 +469,20 @@ Same cause as criterion 1, with separate evidence. `question` recall was 0/5 on 
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+There were **no disagreements**: I read each of the 30 posts and labeled it under `data/staff_taxonomy.md`, and my label matched staff's on every one. With nothing to adjudicate, here are the 7 posts staff marked **HARD**, where we agreed, and the rule that decided each:
 
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+| Post | Tempting label | Label (staff and me) | Rule that decided it |
+|---|---|---|---|
+| sp_005: "Carbon plates aren't the whole story. My times dropped 2%… when the only thing that changed was going from 35 to 50 miles a week." | `hot_take` | `analysis` | Rule 1: the two 2% figures and the mileage change carry the argument |
+| sp_010: "Three of us ran the same session… within 10 seconds of each other over 5 miles…" | `hot_take` (hedged, tiny sample) | `analysis` | Rule 1: the checkable observation is what the claim rests on |
+| sp_014: "Times are down about 3% since the shoe rules changed, so obviously the shoes are the whole story…" | `analysis` | `hot_take` | Rule 1: the 3% decorates a conclusion already reached, so "so obviously" does the work |
+| sp_019: "Nobody actually enjoys the long run. They enjoy having done it…" | `reaction` | `hot_take` | Rule 2: a general claim about everyone, not a report of the writer's own experience |
+| sp_020: "Every injury thread on this forum is the same injury and the same three replies." | `analysis` | `hot_take` | Rule 1: checkable in principle, but no count is given |
+| sp_028: "Third DNF this year. I don't really want to talk about it…" | `analysis` | `reaction` | Rule 3: "third this year" is countable, but nothing is argued from it |
+| sp_029: "Just realised the shoes I set every PB in this year are the ones I bought by accident in the wrong size." | `hot_take` | `reaction` | Rule 2: reports the writer's own realisation, now |
 
 **What the pattern in my disagreements tells me:**
+I had no disagreements, including on the 4 HARD posts that sit on the `analysis` ↔ `hot_take` boundary (sp_005, sp_010, sp_014, sp_020). That's evidence I can apply a written "does the fact carry the argument" rule consistently. The staff rules are also tighter than mine: Rule 1 gives a concrete test (is the fact load-bearing or decoration), while my own rule asks whether evidence is "central", which is a softer judgment. The set may have been easier for me because the running posts are short and each one leans clearly on one rule.
 
 
 
