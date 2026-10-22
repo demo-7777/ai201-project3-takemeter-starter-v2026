@@ -308,6 +308,12 @@ train 139 · val 31 · test 31
 - *What came back:* For example, section 5 failed with `NameError: name 'DEVICE' is not defined`. The explanation was that section 1's first cell hadn't run in the current kernel session.
 - *What I changed:* I reran sections 1–5 in order, and section 5 then wrote `results.json` and `test_split.csv`.
 
+**Moment 3 (unit 6)**
+
+- *What I asked for:* I used AI to help read my three-seed results and find the cause of each missed criterion.
+- *What came back:* It pointed out that the final training loss (about 1.32) was barely below a random 4-way guess (1.386), and that average confidence (about 0.29) was close to random (0.25), so the model was undertrained. It suggested two improvements: more epochs, or more `question` posts.
+- *What I changed:* I chose more epochs (3 → 10) as my one improvement, because the evidence pointed most clearly at training, and reran the three seeds with `RUN_LABEL = "after"`.
+
 **Pre-labelling disclosure:** 20 rows were labeled cold by me with no tools (marked `cold` in the note column). The other 181 rows were pre-labeled by AI (marked `AI-assisted` in the note column) and then reviewed by me.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
@@ -537,10 +543,20 @@ Confusion matrix after, seed 42:
 
 <!-- For each criterion still missed: what you'd do, and why you stopped. -->
 
+**Criterion 1 Still Missed:** In order to fix it, I would increase the percentage of actual question posts present in the dataset. I stopped because only one improvement is allowed this unit, and I used it on increasing epochs.
+
+**Criterion 2 Still Missed:** In order to fix it, I would consider writing stricter definitions of analysis and hot_take so the model can better identify characteristics of a post that are exclusive to either analysis or hot_take. A model for this is the staff taxonomy's Rule 1 ("is the fact load-bearing or decoration?"), a sharper test than my "evidence is central" rule, and one I applied without a single disagreement on the staff set. I stopped because only one improvement is allowed this unit, and the taxonomy has to stay as it was.
+
+**Criterion 3 Still Missed:** In order to fix it, the overall accuracy of the model should naturally increase if the other criteria are met first, then I would run the model again to observe how overall accuracy changed. I stopped because only one improvement is allowed this unit.
+
+**Criterion 5 Still Missed:** In order to fix it, more question posts would have to be included in the dataset, or figure out why the model struggled to identify what should be relatively obvious characteristics of a post that is a question. I stopped because only one improvement is allowed this unit.
+
 
 
 **The gap between what I meant my labels to capture and what the model
-learned:**
+learned:** 
+
+The model struggles significantly to properly label the actual question posts correctly. It is broken to the point where it labelled the question posts incorrectly more often than it labelled the question posts correctly: before the fix, 0 of 5 `question` posts were labeled correctly on any seed, and after it, 2/5, 3/5 and 0/5. The misses went mostly to `analysis` (5 of the 10 after-fix misses, with 3 to `hot_take` and 2 to `reaction`).
 <!-- Two sentences. Your confusion matrix is the evidence. -->
 
 
